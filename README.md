@@ -1,16 +1,13 @@
 # koa-vue-starter
 
-> A Vue.js project
+> A Koa + Vue.js project
 
 ## Build Setup
 
 ```
 # install dependencies
-npm install
-
-# build for production
-npm run build
+yarn
 
 # start production server
-npm run start
+npm start
 ```
