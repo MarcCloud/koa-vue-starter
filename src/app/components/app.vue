@@ -13,7 +13,7 @@
             VueJS Starter
           </h1>
           <h2 class="subtitle">
-            Modify app.vue to begin using this template.
+            Modify app.vue to begin using this {{message}}.
           </h2>
           </div>
         </div>

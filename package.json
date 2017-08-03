@@ -12,8 +12,8 @@
   },
   "scripts": {
     "build": "npm run build:client; npm run build:server;",
-    "build:client": "node ./src/scripts/build-client.js",
-    "build:server": "node ./src/scripts/build-server.js",
+    "build:client": "node ./scripts/build-client.js",
+    "build:server": "node ./scripts/build-server.js",
     "start": "nodemon ./scripts/start"
   },
   "author": "Kristijan Sedlak (Xpepermint)",
