@@ -1,5 +1,3 @@
-const path = require('path');
-const fs = require('fs');
 const webpack = require('webpack');
 const {VueBuilder, VueRender} = require('vue-builder');
 const webpackDevMiddleware = require('koa-webpack-dev-middleware');
@@ -17,7 +15,7 @@ const compose = convert.compose; // || require('koa-compose');
 
 // Convert koa legacy ( 0.x & 1.x ) generator middleware to modern promise middleware ( 2.x ).
 
-exports.devServer = function ({server, client, verbose=false}={}) {
+exports.devServer = function ({server, client, verbose = false} = {}) {
   let clientConfig = Object.assign({}, client);
   let serverConfig = Object.assign({}, server);
 

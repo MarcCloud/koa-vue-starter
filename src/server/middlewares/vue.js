@@ -2,7 +2,7 @@
 * Returns the Vue.js production rendering middleware.
 */
 
-exports.vueBundleRenderer = function (config) {
+exports.vueBundleRenderer = function () {
   let {bundleRenderer} = require('koa-vue-builder');
 
   return bundleRenderer(`${__dirname}/../../../dist/server/bundle.js`);
@@ -17,7 +17,7 @@ exports.vueDevServer = function (config) {
   let {devServer} = require('./koa-vue-dev');
 
   return devServer({
-    server: build({mode:'server'}),
+    server: build({mode: 'server'}),
     client: build({mode: 'client'})
   });
 }
@@ -26,13 +26,12 @@ exports.vueDevServer = function (config) {
 * Returns the Vue middleware which handles the rendering.
 */
 
-exports.vueHandler = function(config) {
+exports.vueHandler = function (config) {
   let isDev = config.env === 'development';
 
   if (isDev) {
     return exports.vueDevServer(config);
-  }
-  else {
+  } else {
     return exports.vueBundleRenderer(config);
   }
 };

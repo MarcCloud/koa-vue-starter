@@ -1,5 +1,5 @@
 import {app} from '../app';
 
-export default async (ctx) => {
+export default async () => {
   return await app;
 };

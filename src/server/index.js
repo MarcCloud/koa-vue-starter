@@ -7,12 +7,12 @@ const HtmlWriterStream = require('./html-writer-stream');
 /*
 * HTTP server class.
 */
-exports.server = function server(config) {
+exports.server = function server (config) {
   return {
-    _server: null,
-    start() {
+    server: null,
+    start () {
       return (async () => {
-      if (this._server) return this;
+      if (this.server) return this;
 
       const app = new koa();
 
@@ -21,7 +21,7 @@ exports.server = function server(config) {
       app.use(serve(staticPath));
 
       // basic middlewware to set config on ctx
-      app.use(async(ctx, next) => {
+      app.use(async (ctx, next) => {
         ctx.config = config
         await next();
       });
@@ -45,14 +45,16 @@ exports.server = function server(config) {
         .use(router.allowedMethods());
 
       let {serverPort, serverHost} = config;
-      this._server = await app.listen(serverPort, serverHost);
+      this.server = await app.listen(serverPort, serverHost);
+      return this;
       })();
     },
-    stop() {
+    stop () {
       return (async () => {
-        if (!this._server) return this;
-        await this._server.close();
-        this._server = null;
+        if (!this.server) return this;
+        await this.server.close();
+        this.server = null;
+        return this;
       })();
     }
   }

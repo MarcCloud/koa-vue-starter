@@ -14,7 +14,8 @@
     "build": "npm run build:client; npm run build:server;",
     "build:client": "node ./scripts/build-client.js",
     "build:server": "node ./scripts/build-server.js",
-    "start": "nodemon ./scripts/start"
+    "start": "nodemon ./scripts/start",
+    "lint": "eslint src/"
   },
   "author": "Kristijan Sedlak (Xpepermint)",
   "license": "MIT",
@@ -35,6 +36,7 @@
     "babel-preset-latest": "^6.24.1",
     "babel-preset-stage-2": "^6.24.1",
     "css-loader": "^0.28.4",
+    "eslint": "^4.3.0",
     "extract-text-webpack-plugin": "^3.0.0",
     "file-loader": "^0.11.2",
     "inline-environment-variables-webpack-plugin": "^1.2.1",

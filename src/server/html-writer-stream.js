@@ -1,16 +1,16 @@
 var Transform = require('stream').Transform
 
 module.exports = class HtmlWriterStream extends Transform {
-  constructor(options = {}) {
+  constructor (options = {}) {
     super(options);
     this.started = false;
   }
 
-  get isHead() {
+  get isHead () {
     return !this.started;
   }
 
-  head(data) {
+  head (data) {
     this.push(`<!DOCTYPE html><html lang="en">
 <head>
   <meta charset="utf-8">
@@ -23,26 +23,28 @@ module.exports = class HtmlWriterStream extends Transform {
     this.started = false;
   }
 
-  body(data) {
+  body (data) {
     this.push(data.toString());
   }
 
-  footer() {
+  footer () {
     this.push(`<script src="/bundle.js"></script>
   </body>
 </html>`);
-
-    // end the stream
     this.push(null);
   }
 
-  _transform(chunk, encoding, done) {
+  _transform (chunk, encoding, done) {
       var data = chunk.toString()
-      this.isHead ? this.head(data) : this.body(data);
+      if (this.isHead) {
+        this.head(data)
+      } else {
+        this.body(data);
+      }
       done();
   }
 
-  _flush(done) {
+  _flush (done) {
       this.footer();
       this._lastLineData = null
       done();
