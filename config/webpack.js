@@ -52,7 +52,7 @@ module.exports = function ({mode, env, publicPath}) {
     entry: [
       isClient ? 'babel-polyfill' : null,
       isClient && isDev ? 'webpack-hot-middleware/client' : null,
-      join(__dirname, '..', 'src', 'app', `${mode}-entry.js`)
+      join(__dirname, '..', 'src', `${mode}`, 'entry.js')
     ].filter((e) => !!e),
     output: {
       path: join(__dirname, '..', 'dist', mode),

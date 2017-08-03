@@ -13,12 +13,12 @@ exports.vueBundleRenderer = function (config) {
 */
 
 exports.vueDevServer = function (config) {
-  let {webpackServer, webpackClient} = config;
+  let {build} = config;
   let {devServer} = require('./koa-vue-dev');
 
   return devServer({
-    server: webpackServer(),
-    client: webpackClient()
+    server: build({mode:'server'}),
+    client: build({mode: 'client'})
   });
 }
 

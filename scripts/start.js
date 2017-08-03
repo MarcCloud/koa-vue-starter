@@ -1,10 +1,10 @@
-const {Server} = require('..');
+const {server} = require('../src/server');
 const config = require('../config');
 
-const app = new Server(config);
-app.listen().then(() => {
+const app = server(config);
+app.start().then(() => {
   console.log(`Listening on ${config.serverHost}:${config.serverPort}`);
 }).catch((error) => {
-  app.close();
+  app.stop();
   console.log('Error', error);
 });

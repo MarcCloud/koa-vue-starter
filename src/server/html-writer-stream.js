@@ -15,7 +15,9 @@ module.exports = class HtmlWriterStream extends Transform {
 <head>
   <meta charset="utf-8">
   <title>'No title'</title>
-  <link href="/bundle.css" rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.5.0/css/bulma.min.css" rel="stylesheet" type="text/css" />
+  <link href="/bundle.css" rel='stylesheet' type='text/css' />
 </head><body>${data}`);
 
     this.started = false;

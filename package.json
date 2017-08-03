@@ -14,7 +14,7 @@
     "build": "npm run build:client; npm run build:server;",
     "build:client": "node ./src/scripts/build-client.js",
     "build:server": "node ./src/scripts/build-server.js",
-    "start": "node ./src/scripts/start"
+    "start": "nodemon ./scripts/start"
   },
   "author": "Kristijan Sedlak (Xpepermint)",
   "license": "MIT",
@@ -39,6 +39,7 @@
     "file-loader": "^0.11.2",
     "inline-environment-variables-webpack-plugin": "^1.2.1",
     "koa-webpack-hot-middleware": "^1.0.3",
+    "nodemon": "^1.11.0",
     "postcss-cssnext": "^3.0.2",
     "vue-loader": "^13.0.2",
     "webpack": "^3.4.1",

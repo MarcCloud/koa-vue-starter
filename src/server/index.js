@@ -7,37 +7,22 @@ const HtmlWriterStream = require('./html-writer-stream');
 /*
 * HTTP server class.
 */
-
-exports.Server = class {
-
-  /*
-  * Class constructor.
-  */
-
-  constructor(config) {
-    this._config = Object.assign(config);
-
-    this._app = null;
-    this._server = null;
-  }
-
-  /*
-  * Returns a promise which starts the server.
-  */
-
-  listen() {
-    return (async () => {
+exports.server = function server(config) {
+  return {
+    _server: null,
+    start() {
+      return (async () => {
       if (this._server) return this;
 
-      this._app = new koa();
+      const app = new koa();
 
       // serve static assets
       let staticPath = 'dist/client';
-      this._app.use(serve(staticPath));
+      app.use(serve(staticPath));
 
       // basic middlewware to set config on ctx
-      this._app.use(async(ctx, next) => {
-        ctx.config = this._config;
+      app.use(async(ctx, next) => {
+        ctx.config = config
         await next();
       });
 
@@ -54,30 +39,21 @@ exports.Server = class {
         await next();
       });
 
-      this._app
-        .use(vueHandler(this._config))
+      app
+        .use(vueHandler(config))
         .use(router.routes())
         .use(router.allowedMethods());
 
-      let {serverPort, serverHost} = this._config;
-      this._server = await this._app.listen(serverPort, serverHost);
-      return this._server;
-    })();
+      let {serverPort, serverHost} = config;
+      this._server = await app.listen(serverPort, serverHost);
+      })();
+    },
+    stop() {
+      return (async () => {
+        if (!this._server) return this;
+        await this._server.close();
+        this._server = null;
+      })();
+    }
   }
-
-  /*
-  * Returns a promise which stops the server.
-  */
-
-  close() {
-    return (async () => {
-      if (!this._server) return this;
-
-      await this._server.close();
-
-      this._server = null;
-      this._app = null;
-    })();
-  }
-
 }
